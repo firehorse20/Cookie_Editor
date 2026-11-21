@@ -7,6 +7,8 @@ class SettingStore {
     }
 
     load_data_setting = false;
+    // Ads were removed from this build; kept only so the popup
+    // positioning ternaries that read it keep working. Always false.
     show_ads = false;
     loading = false;
     display_cookie = "default";

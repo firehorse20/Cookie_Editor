@@ -50,8 +50,9 @@ Cookie Editor is a powerful yet easy-to-use tool designed for seamless cookie ma
 
 ✅ Support customizing Clear browsing data
 
-💡 Support our development
-To help Cookie Editor continue to improve its features, we display promotions for other useful extensions and banner ads. This helps us maintain and improve the tool to provide the best user experience.
+💡 This build ships without ads: the sidebar ad banner, the wetab.org ad
+script and the "No Ads" upsell have been removed. The premium upgrade
+prompt for the extension's own paid tier is still present.
 
 ## Install
 

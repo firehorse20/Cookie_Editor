@@ -1,7 +1,6 @@
 /*global chrome*/
 import { makeAutoObservable } from 'mobx';
 import {settingStore} from "./setting.store";
-
 class AccountStore {
     constructor() {
         makeAutoObservable(this);
@@ -19,9 +18,7 @@ class AccountStore {
         const dataResponse = await response.json();
         if (dataResponse.data.user) {
             this.account = dataResponse.data.user;
-            settingStore.show_ads = dataResponse.data.user.account_type === 1;
-        } else {
-            settingStore.show_ads = true;
+            // Ads were removed from this build, so show_ads stays false.
         }
     }
 

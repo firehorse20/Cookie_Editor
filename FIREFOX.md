@@ -104,6 +104,10 @@ not by a live run inside Firefox — please report any runtime issue.
 
 ## Known differences / limitations on Firefox
 
+- **No ads.** This build ships without ads: the sidebar ad banner
+  (`cookieeditor.org/ads` iframe), the wetab.org ad script and the
+  "No Ads" upsell card were removed. The extension's own premium
+  upgrade prompt is still present.
 - **Sidebar, not side panel.** Firefox's sidebar is per-window, while
   Chrome's side panel is per-tab. The same `pages/sidepanel.html` is
   shown; it does not follow the active tab the way Chrome's does.

@@ -6,7 +6,6 @@ import AlertComponent from "./components/alert";
 import ShowCookie from "./tabs/cookie";
 import {googleAnalytics} from "../../utils/google_analytics";
 import About from "./components/popup/about";
-import Ads from "./components/ads";
 import PopupBuyCoffee from "./components/popup/buy_coffee";
 import FeatureSuggest from "./components/popup/feature_suggest";
 import {settingStore} from "../../mobx/setting.store";
@@ -107,7 +106,7 @@ const ExtensionSidePanel = () => {
                     className="h-full inline-block"
                     style={{width: "calc(100% - 50px)"}}
                 >
-                    <div className={`w-full h-full p-[10px] ${settingStore.show_ads ? "pb-[70px]" : "pb-[20px]"} overflow-y-auto relative`}>
+                    <div className={`w-full h-full p-[10px] pb-[20px] overflow-y-auto relative`}>
                         <ShowCookie/>
 
                         <Setting/>
@@ -137,17 +136,6 @@ const ExtensionSidePanel = () => {
                         <FeatureSuggest/>
 
                         <Loading />
-
-                        {
-                            settingStore.show_ads && (
-                                <div
-                                    className={`h-[60px] fixed bottom-0 left-0 p-[5px] bg-white`}
-                                    style={{zIndex: 50, width: "calc(100% - 50px)"}}
-                                >
-                                    <Ads/>
-                                </div>
-                            )
-                        }
 
                         <PopupBuyCoffee/>
 

@@ -118,24 +118,6 @@ const Upgrade = () => {
                                     </li>
                                 </ul>
                             </div>
-                            {
-                                (Object.keys(accountStore.account).length === 0 || accountStore.account.account_type === 1) && (
-                                    <div className={`bg-white rounded-[10px] p-5`}>
-                                        <p className={`text-gray-800 font-bold text-sm`}>
-                                            {extension.getLang("title_upgrade_no_ads").replaceAll("___price___", "$1")}
-                                        </p>
-                                        <p className={`text-gray-800 text-xs`}>
-                                            {extension.getLang("description_upgrade_no_ads")}
-                                        </p>
-
-                                        <button
-                                            onClick={() => handleUpgrade("no-ads")}
-                                            className={`w-full text-xs py-2.5 border-1 mt-2 border-blue-600 bg-blue-600 rounded-lg text-white hover:bg-blue-700 cursor-pointer`}>
-                                            {extension.getLang("title_upgrade_no_ads").replaceAll("___price___", "$1")}
-                                        </button>
-                                    </div>
-                                )
-                            }
                         </motion.div>
                     </>
                 )
