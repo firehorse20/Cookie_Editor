@@ -80,7 +80,7 @@
     "default_title": "Cookie Editor",
     "open_at_install": false
   },
-  "version": "1.1.0.4",
+  "version": "1.1.0.5",
   "web_accessible_resources": [
     {
       "matches": [
