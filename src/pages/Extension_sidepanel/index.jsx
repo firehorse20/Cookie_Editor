@@ -9,7 +9,6 @@ import About from "./components/popup/about";
 import {settingStore} from "../../mobx/setting.store";
 import ClearData from "./tabs/clear_data";
 import Setting from "./tabs/setting";
-import PopupDetailCookie from "./components/popup/detail_cookie";
 import Loading from "./components/loading";
 
 const ExtensionSidePanel = () => {
@@ -86,8 +85,6 @@ const ExtensionSidePanel = () => {
                         <AlertComponent/>
 
                         <About/>
-
-                        <PopupDetailCookie />
 
                         <Loading />
 

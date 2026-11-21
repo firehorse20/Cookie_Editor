@@ -35,7 +35,7 @@ collected either.
 
 ### Install on Google Chrome
 
-Find this extension on the [Chrome Web Store.](https://chromewebstore.google.com/detail/cookie-editor/ookdjilphngeeeghgngjabigmpepanpl)
+Find this extension on [Firefox Add-ons](https://addons.mozilla.org/firefox/addon/cookie-editor-firefox/) (under review) and in [GitHub Releases](https://github.com/firehorse20/Cookie_Editor/releases).
 
 ### Install on Firefox
 

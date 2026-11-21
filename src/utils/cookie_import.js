@@ -13,7 +13,7 @@ const shouldIncludeDomain = (cookie) => {
     return cookie.hostOnly === undefined && cookie.domain.startsWith(".");
 }
 
-export const createCookieSetDetails = (cookie, url) => {
+export const createCookieSetDetails = (cookie, url, storeId) => {
     const name = cookie.name || "";
     const details = {
         url,
@@ -35,6 +35,10 @@ export const createCookieSetDetails = (cookie, url) => {
 
     if (cookie.storeId) {
         details.storeId = cookie.storeId;
+    } else if (storeId) {
+        // Import into the current tab's store (e.g. its Firefox
+        // container) instead of the default store.
+        details.storeId = storeId;
     }
 
     const secure = Boolean(cookie.secure || name.startsWith(SECURE_PREFIX) || name.startsWith(HOST_PREFIX));

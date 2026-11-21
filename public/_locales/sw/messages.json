@@ -303,10 +303,10 @@
         "message": "Kuhusu Cookie Editor"
     },
     "about_content_1": {
-        "message": "Mimi ni mtengenezaji na napenda kuunda nyongeza za Chrome. Nisaidie kukuza mawasiliano ya mitandao ya kijamii."
+        "message": "Cookie Editor Firefox is a community fork of Cookie Editor. It manages, edits and deletes cookies for the current tab."
     },
     "about_content_2": {
-        "message": "Unaweza kujifunza zaidi kuhusu mimi na kuniwasiliana kupitia mitandao ifuatayo."
+        "message": "Source code and issue reports: https://github.com/firehorse20/Cookie_Editor"
     },
     "account_type_premium": {
         "message": "Premium"

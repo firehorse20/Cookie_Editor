@@ -3,13 +3,11 @@ import {observer} from "mobx-react-lite";
 import {extension} from "../../../../utils/chrome";
 import {settingStore} from "../../../../mobx/setting.store";
 import IconCookie from "../../../../icons/cookie";
-import IconN8n from "../../../../icons/n8n";
 import IconSetting from "../../../../icons/setting";
 import IconStar from "../../../../icons/star";
 import IconInfo from "../../../../icons/info";
 import GithubIcon from "../../../../icons/github";
 import IconDelete from "../../../../icons/delete";
-import {openN8nPage} from "../../../../utils/n8n_page";
 import {PROJECT_URL, AMO_REVIEWS_URL} from "../../../../constants/website";
 
 const Sidebar = () => {
@@ -44,19 +42,6 @@ const Sidebar = () => {
                             style={{zIndex: 51}}
                             className="hidden group-hover:block bg-white absolute right-[50px] top-[50%] translate-y-[-50%] rounded-[5px] p-[5px]">
                             <span className="text-gray-900 whitespace-nowrap">Cookie</span>
-                        </div>
-                    </div>
-                    <div
-                        onClick={() => openN8nPage()}
-                        className={actionClass(false)}
-                    >
-                        <IconN8n cname={iconClass}/>
-                        <div
-                            style={{zIndex: 51}}
-                            className="hidden group-hover:block bg-white absolute right-[50px] top-[50%] translate-y-[-50%] rounded-[5px] p-[5px]">
-                            <span className="text-gray-900 whitespace-nowrap">
-                                {extension.getLang("sidebar_n8n")}
-                            </span>
                         </div>
                     </div>
                 </div>

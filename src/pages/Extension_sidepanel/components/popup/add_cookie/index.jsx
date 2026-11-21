@@ -24,7 +24,8 @@ const AddCookie = () => {
         try {
             const [tabCurrent] = await chrome.tabs.query({active: true, lastFocusedWindow: true});
             await chrome.cookies.set({
-                ...cookie, ...{url: tabCurrent.url}
+                ...cookie, ...{url: tabCurrent.url},
+                ...(tabCurrent.cookieStoreId ? {storeId: tabCurrent.cookieStoreId} : {})
             })
             document.dispatchEvent(new CustomEvent("update_cookie", {
                 detail: {action: "add"},

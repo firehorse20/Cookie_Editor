@@ -5,6 +5,7 @@ import ModalPopup from "../modal_popup";
 import {motion, AnimatePresence} from "framer-motion";
 import {extension} from "../../../../../utils/chrome";
 import {getListHistory} from "../../../../../utils/history";
+import {getAllCookies} from "../../../../../utils/browser";
 
 const PopupAutoRemoveCookie = ({close}) => {
     const ref = useRef(null);
@@ -22,7 +23,7 @@ const PopupAutoRemoveCookie = ({close}) => {
     }
 
     const handleGetHistories = async () => {
-        const allCookie = await chrome.cookies.getAll({});
+        const allCookie = await getAllCookies();
         let domains = [];
         for (let i = 0; i < allCookie.length; i++) {
             const index = domains.findIndex(item => item.domain === allCookie[i].domain);

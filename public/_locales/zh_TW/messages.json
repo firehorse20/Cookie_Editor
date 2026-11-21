@@ -313,10 +313,10 @@
         "message": "關於 Cookie Editor"
     },
     "about_content_1": {
-        "message": "我是一名開發者，喜歡開發 Chrome 擴充功能，協助社群媒體傳播與行銷。"
+        "message": "Cookie Editor Firefox 是 Cookie Editor 的一個分支，用於查看、編輯和刪除目前分頁的 Cookie。"
     },
     "about_content_2": {
-        "message": "你可以透過下方社群平台進一步了解我並聯絡我。"
+        "message": "原始碼與問題回報：https://github.com/firehorse20/Cookie_Editor"
     },
     "account_type_premium": {
         "message": "進階版"

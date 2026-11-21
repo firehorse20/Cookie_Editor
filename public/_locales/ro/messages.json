@@ -303,10 +303,10 @@
         "message": "Despre Cookie Editor"
     },
     "about_content_1": {
-        "message": "Sunt dezvoltator și îmi place să creez extensii pentru Chrome. Ajut la dezvoltarea și promovarea comunicării pe rețele sociale."
+        "message": "Cookie Editor Firefox is a community fork of Cookie Editor. It manages, edits and deletes cookies for the current tab."
     },
     "about_content_2": {
-        "message": "Află mai multe despre mine și contactează‑mă prin platformele sociale de mai jos."
+        "message": "Source code and issue reports: https://github.com/firehorse20/Cookie_Editor"
     },
     "account_type_premium": {
         "message": "Premium"

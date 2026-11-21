@@ -34,7 +34,6 @@ export default defineConfig(({ mode }) => {
       outDir: isFirefox ? "dist-firefox" : "dist",
       rollupOptions: {
         input: {
-          n8n: resolve(__dirname, "pages/n8n.html"),
           // Firefox only: @crxjs recognises Chrome's `sidePanel` manifest
           // key but not Firefox's `sidebar_action`, so without this entry
           // pages/sidepanel.html is copied raw with its dev script path

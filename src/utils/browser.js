@@ -65,8 +65,38 @@ const callPermissions = (method, details) =>
     }
   });
 
-// Firefox MV3: host permissions declared in the manifest start
-// UNGRANTED (unlike Chrome, where they are granted at install).
+// Firefox Multi-Account Containers: every container tab lives in its
+// own cookie store (`firefox-container-N`), and `cookies.*` calls
+// without `storeId` read the *extension's* store (the default one) —
+// so a container tab looks empty even though the site has cookies.
+// Firefox exposes the tab's store as `tab.cookieStoreId` (Chrome
+// tabs have no such field, so this is a no-op there).
+export const storeIdForTab = (tab) => tab?.cookieStoreId;
+
+export const getCookiesForTab = async (tab) => {
+  const details = { url: tab.url };
+  const storeId = storeIdForTab(tab);
+  if (storeId) details.storeId = storeId;
+  return browserAPI.cookies.getAll(details);
+};
+
+// All cookies across every store (containers included). Plain
+// `getAll({})` on Firefox only sees the default store.
+export const getAllCookies = async () => {
+  let stores = [];
+  try {
+    stores = await browserAPI.cookies.getAllCookieStores();
+  } catch (_) {
+    stores = [];
+  }
+  if (!stores?.length) return browserAPI.cookies.getAll({});
+  const lists = await Promise.all(
+    stores.map((s) =>
+      browserAPI.cookies.getAll({ storeId: s.id }).catch(() => [])
+    )
+  );
+  return lists.flat();
+};
 // Until the user grants them, `cookies.getAll({url})` silently
 // resolves to [] — no error, no cookies. The sidebar must ask for
 // them at runtime; without this the extension looks broken on

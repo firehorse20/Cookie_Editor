@@ -19,6 +19,7 @@ const ImportCookie = () => {
 
     const [password, setPassword] = useState("");
     const [url, setUrl] = useState("");
+    const [storeId, setStoreId] = useState("");
     const [linkImport, setLinkImport] = useState("");
     const [cookies, setCookies] = useState([]);
     const [contentImport, setContentImport] = useState("");
@@ -45,7 +46,7 @@ const ImportCookie = () => {
     const handleImportCookieJson = async (dataCookies) => {
         let cookies = typeof dataCookies === "string" ? JSON.parse(dataCookies) : dataCookies
         for (let i = 0; i < cookies.length; i++) {
-            const dataUpdate = createCookieSetDetails(cookies[i], url);
+            const dataUpdate = createCookieSetDetails(cookies[i], url, storeId);
             await chrome.cookies.set(dataUpdate);
             if (i === cookies.length - 1) {
                 settingStore.popup = "";
@@ -64,7 +65,8 @@ const ImportCookie = () => {
                     name: cookieStr[0],
                     value: cookieStr[1],
                     url: url,
-                    secure: cookieStr[0].startsWith("__Secure-")
+                    secure: cookieStr[0].startsWith("__Secure-"),
+                    ...(storeId ? {storeId} : {})
                 }
 
                 await chrome.cookies.set(dataUpdate);
@@ -87,7 +89,8 @@ const ImportCookie = () => {
                     value: cookieArray[6],
                     path: cookieArray[2],
                     secure: (cookieArray[3] === "TRUE" || cookieArray[5].startsWith("__Secure-")),
-                    url: url
+                    url: url,
+                    ...(storeId ? {storeId} : {})
                 }
 
                 await chrome.cookies.set(dataUpdate);
@@ -169,6 +172,7 @@ const ImportCookie = () => {
         (async () => {
             const [tabCurrent] = await chrome.tabs.query({active: true, lastFocusedWindow: true});
             setUrl(tabCurrent.url)
+            if (tabCurrent.cookieStoreId) setStoreId(tabCurrent.cookieStoreId)
         })()
     }, [])
 

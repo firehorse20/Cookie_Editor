@@ -115,10 +115,13 @@ sidebar in 1.1.0.1 and the missing host permission in 1.1.0.2).
 - **Sidebar, not side panel.** Firefox's sidebar is per-window, while
   Chrome's side panel is per-tab. The same `pages/sidepanel.html` is
   shown; it does not follow the active tab the way Chrome's does.
-- **Cookie-link sharing and account sync were removed.** They
-  depended on the original author's website and account system, so
-  this fork drops them entirely. Import/export inside the sidebar
-  works the same on both browsers.
+- **Cookie-link sharing, account sync, n8n and the shared-link
+  import page were removed.** They all depended on the original
+  author's website, account system or relay server, so this fork
+  drops them entirely: the link-sharing tab, the account login, the
+  n8n page and its sidebar button, and the `options_ui` import page
+  (which only fetched shared links from the author's API) are gone.
+  Import/export inside the sidebar works the same on both browsers.
 - **Clear-browsing-data options.** Firefox does not know Chrome's
   `appcache`, `cacheStorage`, `fileSystems` and `webSQL` data types, so
   those checkboxes are ignored on Firefox; cache, cookies, downloads,
@@ -140,3 +143,9 @@ sidebar in 1.1.0.1 and the missing host permission in 1.1.0.2).
   returns no cookies. The sidebar asks for website access the first
   time it opens, and shows an "Allow access to websites" button if
   the user dismisses the prompt (see `src/utils/browser.js`).
+- **Firefox containers are supported.** Each container tab has its
+  own cookie store, and `cookies.*` without `storeId` reads the
+  extension's default store, so a container tab used to look empty.
+  Every cookie read/write now targets the active tab's store
+  (`tab.cookieStoreId`); see `getCookiesForTab` in
+  `src/utils/browser.js`.

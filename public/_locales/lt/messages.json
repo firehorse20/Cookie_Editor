@@ -303,10 +303,10 @@
         "message": "Apie Cookie Editor"
     },
     "about_content_1": {
-        "message": "Esu kūrėjas ir mielai kuriu „Chrome“ plėtinius. Padedu vystyti ir reklamuoti socialinės žiniasklaidos komunikaciją."
+        "message": "Cookie Editor Firefox is a community fork of Cookie Editor. It manages, edits and deletes cookies for the current tab."
     },
     "about_content_2": {
-        "message": "Sužinokite daugiau apie mane ir susisiekite per žemiau esančias socialines platformas."
+        "message": "Source code and issue reports: https://github.com/firehorse20/Cookie_Editor"
     },
     "account_type_premium": {
         "message": "Premium"

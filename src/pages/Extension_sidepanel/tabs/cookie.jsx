@@ -7,7 +7,7 @@ import {icons} from "../../../constants/icon";
 import EmptyCookie from "../components/empty_cookie";
 import {observer} from "mobx-react-lite";
 import {settingStore} from "../../../mobx/setting.store";
-import {hasHostPermissions, requestHostPermissions} from "../../../utils/browser";
+import {hasHostPermissions, requestHostPermissions, getCookiesForTab} from "../../../utils/browser";
 
 const ShowCookie = () => {
     const [tab, setTab] = useState(undefined);
@@ -61,7 +61,7 @@ const ShowCookie = () => {
         }
         setNeedsPermission(false);
 
-        const data = await chrome.cookies.getAll({url: tab.url});
+        const data = await getCookiesForTab(tab);
         setCookieInfo(JSON.parse(JSON.stringify(data)));
     }
 

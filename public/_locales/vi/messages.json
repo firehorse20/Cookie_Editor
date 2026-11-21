@@ -444,10 +444,10 @@
         "message": "Giới thiệu về Cookie Editor"
     },
     "about_content_1": {
-        "message": "Tôi là một lập trình viên và tôi thích tạo các tiện ích mở rộng cho Chrome. Giúp bạn phát triển và truyền thông trên mạng xã hội."
+        "message": "Cookie Editor Firefox is a community fork of Cookie Editor. It manages, edits and deletes cookies for the current tab."
     },
     "about_content_2": {
-        "message": "Bạn có thể tìm hiểu thêm về tôi và liên hệ thông qua các nền tảng mạng xã hội dưới đây."
+        "message": "Source code and issue reports: https://github.com/firehorse20/Cookie_Editor"
     },
     "account_type_premium": {
         "message": "Cao cấp"
