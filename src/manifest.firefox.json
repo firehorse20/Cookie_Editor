@@ -1,0 +1,111 @@
+{
+  "action": {
+    "default_icon": {
+      "128": "icons/128x128.png",
+      "16": "icons/16x16.png",
+      "32": "icons/32x32.png",
+      "48": "icons/48x48.png"
+    },
+    "default_title": "Cookie Editor"
+  },
+  "background": {
+    "scripts": [
+      "src/background.js"
+    ]
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "cookie-editor@cookieeditor.org",
+      "strict_min_version": "140.0",
+      "data_collection_permissions": {
+        "required": ["authenticationInfo", "browsingActivity"],
+        "optional": ["technicalAndInteraction"]
+      }
+    },
+    "gecko_android": {
+      "strict_min_version": "142.0"
+    }
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "js": [
+        "src/ads.js"
+      ],
+      "matches": [
+        "https://wetab.org/*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "src/content.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'; script-src-elem 'self' "
+  },
+  "default_locale": "en",
+  "description": "Simple yet powerful Cookie Editor that allow you to quickly create, edit and delete cookies without leaving your tab.",
+  "host_permissions": [
+    "https://*/*",
+    "http://*/*"
+  ],
+  "icons": {
+    "128": "icons/128x128.png",
+    "16": "icons/16x16.png",
+    "32": "icons/32x32.png",
+    "48": "icons/48x48.png"
+  },
+  "manifest_version": 3,
+  "name": "Cookie Editor",
+  "optional_permissions": [
+    "browsingData",
+    "history"
+  ],
+  "options_ui": {
+    "open_in_tab": true,
+    "page": "pages/import.html"
+  },
+  "permissions": [
+    "cookies",
+    "tabs",
+    "contextMenus",
+    "storage",
+    "alarms"
+  ],
+  "short_name": "Cookie Editor",
+  "sidebar_action": {
+    "default_icon": {
+      "128": "icons/128x128.png",
+      "16": "icons/16x16.png",
+      "32": "icons/32x32.png",
+      "48": "icons/48x48.png"
+    },
+    "default_panel": "pages/sidepanel.html",
+    "default_title": "Cookie Editor",
+    "open_at_install": false
+  },
+  "version": "1.1.0.0",
+  "web_accessible_resources": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "resources": [
+        "images/*",
+        "pages/*",
+        "gifs/*",
+        "fonts/*",
+        "css/*",
+        "scripts/*"
+      ]
+    }
+  ]
+}

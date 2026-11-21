@@ -16,7 +16,11 @@
   },
   "scripts": {
     "dev": "vite",
+    "dev:firefox": "vite --mode firefox",
     "build": "vite build",
+    "build:chrome": "vite build --mode chrome",
+    "build:extension": "vite build",
+    "build:firefox": "vite build --mode firefox",
     "preview": "vite preview",
     "test": "vitest run"
   },

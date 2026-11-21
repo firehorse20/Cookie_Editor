@@ -7,6 +7,7 @@ import {useRef} from "react";
 import {useClickOutside} from "../../../../../hooks/useClickOutside";
 import {observer} from "mobx-react-lite";
 import {extension} from "../../../../../utils/chrome";
+import {getExtensionURL} from "../../../../../utils/browser";
 
 const PopupDetailCookie = () => {
     const ref = useRef(null);
@@ -71,7 +72,7 @@ const PopupDetailCookie = () => {
                                                 <div className={`w-full flex justify-between mt-3`}>
                                                     <div className={`w-[59%] inline-block`}>
                                                         <button
-                                                            onClick={() => window.open(`chrome-extension://${chrome.runtime.id}/pages/import.html?cookie_id=${cookieStore.cookie_detail.uuid}`)}
+                                                            onClick={() => window.open(`${getExtensionURL("pages/import.html")}?cookie_id=${cookieStore.cookie_detail.uuid}`)}
                                                             type="button"
                                                             className="text-white w-full bg-blue-600 hover:bg-blue-700 rounded-lg text-xs px-5 py-2"
                                                         >

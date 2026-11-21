@@ -1,37 +1,50 @@
-/*global chrome*/
+/*global chrome, browser*/
 
-import {n8nService} from "./services/n8n";
+import { n8nService } from "./services/n8n";
+import { browserAPI, getExtensionURL, openPanel } from "./utils/browser";
 
-chrome.sidePanel.setPanelBehavior({openPanelOnActionClick: true}).catch((error) => console.error(error));
+// `browserAPI` is `chrome.*` where it exists (Chrome, and Firefox
+// as a porting aid) and `browser.*` otherwise. In Firefox MV3
+// `chrome.*` also returns Promises, so the rest of this file works
+// unchanged on both browsers.
+const api = browserAPI;
 
-chrome.action.onClicked.addListener(async (tab) => {
-    chrome.sidePanel.setOptions({
-        tabId: tab.id,
-        path: "pages/sidepanel.html",
-        enabled: true
-    });
-    chrome.sidePanel.open({tabId: tab.id});
+// Chrome/Edge only: `sidePanel` does not exist in Firefox, which
+// uses `sidebar_action` (declared in manifest.firefox.json) instead.
+if (api.sidePanel) {
+    api.sidePanel.setPanelBehavior({ openPanelOnActionClick: true }).catch((error) => console.error(error));
+}
+
+api.action.onClicked.addListener(async (tab) => {
+    // Firefox: opens the sidebar; Chrome: opens the side panel.
+    await openPanel(tab).catch((error) => console.error(error));
 });
 
-chrome.runtime.onInstalled.addListener(details => {
-    if (details.reason === chrome.runtime.OnInstalledReason.INSTALL) {
-        chrome.tabs.create({
+api.runtime.onInstalled.addListener(details => {
+    if (details.reason === api.runtime.OnInstalledReason.INSTALL) {
+        api.tabs.create({
             url: `https://cookieeditor.org/?install_success=true&ref=https://chromewebstore.google.com/`,
             active: true
         });
-        chrome.runtime.setUninstallURL('https://forms.gle/tCy1URDSXn8yqJ8H7');
-    } else if (details.reason === chrome.runtime.OnInstalledReason.UPDATE) {
-        // chrome.tabs.create({url: `https://cookieeditor.org/?updated_success=true`, active: true});
+        api.runtime.setUninstallURL?.('https://forms.gle/tCy1URDSXn8yqJ8H7');
+    } else if (details.reason === api.runtime.OnInstalledReason.UPDATE) {
+        // api.tabs.create({url: `https://cookieeditor.org/?updated_success=true`, active: true});
     }
 });
 
-chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
+api.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
     if (tab?.url.startsWith("https://cookieeditor.org/cookie/link/")) {
-        chrome.tabs.update(tabId, {url: tab?.url.replace("https://cookieeditor.org/cookie/link/", `chrome-extension://${chrome.runtime.id}/pages/import.html?cookie_id=`)});
+        // getExtensionURL() returns moz-extension://... on Firefox
+        // and chrome-extension://... on Chrome.
+        api.tabs.update(tabId, {url: tab?.url.replace("https://cookieeditor.org/cookie/link/", `${getExtensionURL("pages/import.html")}?cookie_id=`)});
     }
 });
 
-chrome.runtime.onMessageExternal.addListener((request, sender, sendResponse) => {
+// Firefox does not support `externally_connectable`, so web pages
+// cannot message the extension there; the listener is harmless
+// (it simply never fires) and is kept for Chrome.
+if (api.runtime.onMessageExternal) {
+api.runtime.onMessageExternal.addListener((request, sender, sendResponse) => {
     switch (request.action) {
         case "check_install":
             sendResponse({status: true});
@@ -43,9 +56,10 @@ chrome.runtime.onMessageExternal.addListener((request, sender, sendResponse) => 
     }
 
     return true;
-})
+});
+}
 
-chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+api.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     switch (request.action) {
         case "google_analytics":
             sendGoogleAnalytics(request.data, sendResponse);
@@ -94,14 +108,14 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 });
 
 
-chrome.permissions.contains({permissions: ["contextMenus"]}, (result) => {
+api.permissions.contains({permissions: ["contextMenus"]}, (result) => {
     if (result) {
-        chrome.contextMenus.onClicked.addListener(async (info, tab) => {
-            const cookies = await chrome.cookies.getAll({url: tab.url});
+        api.contextMenus.onClicked.addListener(async (info, tab) => {
+            const cookies = await api.cookies.getAll({url: tab.url});
             switch (info.menuItemId) {
                 case "remove_cookie":
                     for (let i = 0; i < cookies.length; i++) {
-                        await chrome.cookies.remove({
+                        await api.cookies.remove({
                             url: tab.url,
                             name: cookies[i].name,
                             storeId: cookies[i].storeId
@@ -110,7 +124,7 @@ chrome.permissions.contains({permissions: ["contextMenus"]}, (result) => {
                     break;
 
                 case "copy_cookie":
-                    chrome.tabs.sendMessage(tab.id, { action: "copy_all_cookie", data: {cookies} });
+                    api.tabs.sendMessage(tab.id, { action: "copy_all_cookie", data: {cookies} });
                     break;
             }
         });

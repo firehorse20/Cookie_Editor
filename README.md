@@ -59,6 +59,22 @@ To help Cookie Editor continue to improve its features, we display promotions fo
 
 Find this extension on the [Chrome Web Store.](https://chromewebstore.google.com/detail/cookie-editor/ookdjilphngeeeghgngjabigmpepanpl)
 
+### Install on Firefox
+
+The extension is not published on Firefox Add-ons (AMO) yet, so install it as a temporary add-on from a local build (Firefox 140+ required). Full details, including how to submit it to AMO, are in [FIREFOX.md](FIREFOX.md).
+
+1. Build the Firefox package:
+   ```bash
+   npm install
+   npm run build:firefox
+   ```
+   This produces the `dist-firefox/` folder.
+2. In Firefox, open `about:debugging#/runtime/this-firefox`.
+3. Click **Load Temporary Add-on…** and select any file inside `dist-firefox/` (for example `dist-firefox/manifest.json`).
+4. Click the Cookie Editor toolbar icon (or the sidebar icon) to open it in the Firefox sidebar.
+
+> ⚠️ Temporary add-ons are removed when Firefox restarts — repeat step 3 after a restart, or install the signed `.xpi` from AMO once it is published there. Your cookies and settings are not affected by reinstalling.
+
 ## How to build
 
 ```bash
@@ -71,7 +87,11 @@ npm install
 ```
 
 ```bash
+# Chrome / Edge (output: dist/)
 npm run build:extension
+
+# Firefox (output: dist-firefox/)
+npm run build:firefox
 ```
 
 ## Info
