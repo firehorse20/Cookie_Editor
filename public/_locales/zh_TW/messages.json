@@ -104,6 +104,16 @@
     "no_cookie_description": {
         "message": "此網站沒有 Cookie。"
     },
+
+    "msg_need_host_permission": {
+        "message": "Cookie Editor 需要授權才能讀取本站的 Cookie。"
+    },
+    "msg_need_host_permission_desc": {
+        "message": "Firefox 安裝時不會自動授予網站存取權限。點下面按鈕允許後，就能看到 Cookie 了。"
+    },
+    "btn_grant_permission": {
+        "message": "允許存取網站"
+    },
     "sidebar_setting": {
         "message": "設定"
     },
@@ -300,7 +310,7 @@
         "message": "今日升級年繳方案可享 25% 折扣！"
     },
     "about_title": {
-        "message": "關於 ThanhBui"
+        "message": "關於 Cookie Editor"
     },
     "about_content_1": {
         "message": "我是一名開發者，喜歡開發 Chrome 擴充功能，協助社群媒體傳播與行銷。"

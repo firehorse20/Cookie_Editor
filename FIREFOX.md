@@ -99,23 +99,26 @@ still produces the exact same Chrome manifest (service worker + side panel).
   pre-existing vendored-library notes (Flowbite/Tailwind `innerHTML` /
   `createContextualFragment` usage), not Firefox issues.
 
-Note: this was validated by build + Mozilla's addons-linter + unit tests,
-not by a live run inside Firefox — please report any runtime issue.
+Note: validated by build + Mozilla's addons-linter + unit tests, and
+by a live temporary install in Firefox (which caught the blank
+sidebar in 1.1.0.1 and the missing host permission in 1.1.0.2).
 
 ## Known differences / limitations on Firefox
 
-- **No ads.** This build ships without ads: the sidebar ad banner
-  (`cookieeditor.org/ads` iframe), the wetab.org ad script and the
-  "No Ads" upsell card were removed. The extension's own premium
-  upgrade prompt is still present.
+- **No ads, no author account.** This build ships without ads: the
+  sidebar ad banner (`cookieeditor.org/ads` iframe), the wetab.org ad
+  script and the "No Ads" upsell card were removed, along with the
+  paid upgrade prompts, the Buy Me a Coffee button, the account login
+  and the cookie-link sharing feature. All links point to the project
+  page instead: https://github.com/firehorse20/Cookie_Editor.
+  Usage analytics are not collected either.
 - **Sidebar, not side panel.** Firefox's sidebar is per-window, while
   Chrome's side panel is per-tab. The same `pages/sidepanel.html` is
   shown; it does not follow the active tab the way Chrome's does.
-- **Cookie-link pages and account sync need the website.** The
-  `cookieeditor.org` link flow (`/cookie/link/…`) and the
-  `onMessageExternal` check only work on Chrome, because Firefox does not
-  support `externally_connectable`. Import/export inside the sidebar works
-  the same on both browsers.
+- **Cookie-link sharing and account sync were removed.** They
+  depended on the original author's website and account system, so
+  this fork drops them entirely. Import/export inside the sidebar
+  works the same on both browsers.
 - **Clear-browsing-data options.** Firefox does not know Chrome's
   `appcache`, `cacheStorage`, `fileSystems` and `webSQL` data types, so
   those checkboxes are ignored on Firefox; cache, cookies, downloads,
@@ -126,7 +129,14 @@ not by a live run inside Firefox — please report any runtime issue.
 - **Data-collection declaration.** The manifest declares required
   `authenticationInfo` (cookies are session/auth data) and
   `browsingActivity` (the current tab's URL is needed to fetch its
-  cookies), plus optional `technicalAndInteraction` (Google Analytics
-  events). This is a best-effort declaration for AMO review — if a
-  reviewer asks for a different categorisation, update
-  `data_collection_permissions` in `src/manifest.firefox.json`.
+  cookies). No usage analytics are collected in this build, so no
+  `technicalAndInteraction` entry is declared. This is a best-effort
+  declaration for AMO review — if a reviewer asks for a different
+  categorisation, update `data_collection_permissions` in
+  `src/manifest.firefox.json`.
+- **Host permission is granted at runtime.** Unlike Chrome, Firefox
+  MV3 does not grant the manifest's host permissions at install
+  time, and until they are granted `cookies.getAll()` silently
+  returns no cookies. The sidebar asks for website access the first
+  time it opens, and shows an "Allow access to websites" button if
+  the user dismisses the prompt (see `src/utils/browser.js`).

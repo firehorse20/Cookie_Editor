@@ -17,7 +17,7 @@
     }
   },
   "manifest_version": 3,
-  "version": "1.1.0.2",
+  "version": "1.1.0.3",
   "default_locale": "en",
   "host_permissions": ["https://*/*", "http://*/*"],
   "permissions": ["cookies", "sidePanel", "tabs"],
@@ -56,12 +56,5 @@
   "options_ui": {
     "page": "pages/import.html",
     "open_in_tab": true
-  },
-  "externally_connectable": {
-    "matches": [
-      "*://localhost/*",
-      "*://127.0.0.1/*",
-      "https://cookieeditor.org/*"
-    ]
   }
 }

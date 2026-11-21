@@ -35,6 +35,48 @@ export const isFirefox = typeof sidebarAction !== "undefined";
 /** Extension URL for a path inside the extension (scheme-correct on both browsers). */
 export const getExtensionURL = (path) => browserAPI.runtime.getURL(path);
 
+// Host access needed to read a tab's cookies.
+export const HOST_ORIGINS = ["https://*/*", "http://*/*"];
+
+// Call a `permissions.*` method tolerating both the Promise shape and
+// the callback shape (see module header): call once with a callback,
+// and use the returned Promise too when the implementation provides one.
+const callPermissions = (method, details) =>
+  new Promise((resolve) => {
+    const fn = browserAPI.permissions?.[method];
+    if (typeof fn !== "function") {
+      resolve(false);
+      return;
+    }
+    let settled = false;
+    const done = (value) => {
+      if (!settled) {
+        settled = true;
+        resolve(value === true);
+      }
+    };
+    try {
+      const result = fn.call(browserAPI.permissions, details, (value) => done(value));
+      if (result && typeof result.then === "function") {
+        result.then(done, () => done(false));
+      }
+    } catch (_) {
+      done(false);
+    }
+  });
+
+// Firefox MV3: host permissions declared in the manifest start
+// UNGRANTED (unlike Chrome, where they are granted at install).
+// Until the user grants them, `cookies.getAll({url})` silently
+// resolves to [] — no error, no cookies. The sidebar must ask for
+// them at runtime; without this the extension looks broken on
+// Firefox even though the same build works on Chrome.
+export const hasHostPermissions = () =>
+  callPermissions("contains", { origins: HOST_ORIGINS });
+
+export const requestHostPermissions = () =>
+  callPermissions("request", { origins: HOST_ORIGINS });
+
 /** Open the sidebar / side panel for the given tab, whichever API this browser has. */
 export const openPanel = async (tab) => {
   if (sidebarAction) {

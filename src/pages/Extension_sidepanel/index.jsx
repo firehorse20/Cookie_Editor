@@ -6,17 +6,9 @@ import AlertComponent from "./components/alert";
 import ShowCookie from "./tabs/cookie";
 import {googleAnalytics} from "../../utils/google_analytics";
 import About from "./components/popup/about";
-import PopupBuyCoffee from "./components/popup/buy_coffee";
-import FeatureSuggest from "./components/popup/feature_suggest";
 import {settingStore} from "../../mobx/setting.store";
-import {accountStore} from "../../mobx/account.store";
-import AccountPopup from "./components/popup/account";
-import RemindUpgrade from "./components/popup/remind_upgrade";
-import Upgrade from "./components/popup/upgrade";
-import RemindLogin from "./components/popup/remind_login";
 import ClearData from "./tabs/clear_data";
 import Setting from "./tabs/setting";
-import LinkCookies from "./tabs/links";
 import PopupDetailCookie from "./components/popup/detail_cookie";
 import Loading from "./components/loading";
 
@@ -24,8 +16,6 @@ const ExtensionSidePanel = () => {
     const isSet = settingStore.load_data_setting;
     const lastDayActive = settingStore.day_active;
     const countDayActive = Number(settingStore.count_day_active);
-    const autoShowPopupFeatureSuggest = settingStore.auto_show_popup_feature_suggest;
-    const autoShowPopupUpgrade = settingStore.auto_show_popup_upgrade;
     const themeMode = settingStore.theme_mode;
 
 
@@ -66,37 +56,17 @@ const ExtensionSidePanel = () => {
     useEffect(() => {
         if (isSet) {
             const today = new Date().toDateString();
-            if (countDayActive >= 3 && autoShowPopupFeatureSuggest !== "true") {
-                settingStore.popup = "feature_suggest";
-                settingStore.setAutoShowPopupFeatureSuggest("true")
-            }
-
-            if (countDayActive >= 5 && autoShowPopupUpgrade !== "true") {
-                settingStore.popup = "upgrade";
-                settingStore.setAutoShowPopupUpgrade("true")
-            }
-
-
             if (!lastDayActive || lastDayActive !== today) {
                 googleAnalytics({name: "account_active", params: []});
                 settingStore.setDayActive(today)
                 settingStore.setCountDayActive(String(countDayActive + 1))
             }
         }
-    }, [isSet, lastDayActive, countDayActive, autoShowPopupFeatureSuggest, autoShowPopupUpgrade])
+    }, [isSet, lastDayActive, countDayActive])
 
     useEffect(() => {
-        chrome.runtime.onMessageExternal.addListener((request, sender, sendResponse) => {
-            if (request.action === "update_account") {
-                accountStore.getAccount().then();
-            }
-
-            sendResponse({status: true})
-        })
-
         googleAnalytics({name: "use_extension", params: []});
         settingStore.setDataSetting();
-        accountStore.getAccount().then();
     }, [])
 
     return (
@@ -113,31 +83,13 @@ const ExtensionSidePanel = () => {
 
                         <ClearData/>
 
-                        {
-                            settingStore.tab === "link_cookies" && (
-                                <LinkCookies />
-                            )
-                        }
-
                         <AlertComponent/>
 
                         <About/>
 
-                        <AccountPopup />
-
-                        <RemindUpgrade />
-
-                        <RemindLogin />
-
-                        <Upgrade />
-
                         <PopupDetailCookie />
 
-                        <FeatureSuggest/>
-
                         <Loading />
-
-                        <PopupBuyCoffee/>
 
                     </div>
                 </div>

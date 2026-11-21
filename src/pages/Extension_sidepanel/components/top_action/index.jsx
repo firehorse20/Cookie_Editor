@@ -1,7 +1,6 @@
 import {useEffect, useState} from "react";
 import CopyCookie from "../popup/copy_cookie";
 import ClearCookie from "../popup/clear_cookie";
-import ShareCookie from "../popup/share_cookie";
 import AddCookie from "../popup/add_cookie";
 import {extension} from "../../../../utils/chrome";
 import ExportCookie from "../popup/export_cookie";
@@ -12,10 +11,8 @@ import {observer} from "mobx-react-lite";
 import IconCopy from "../../../../icons/copy";
 import IconExport from "../../../../icons/export";
 import IconImport from "../../../../icons/import";
-import IconShare from "../../../../icons/share";
 import IconAdd from "../../../../icons/add";
 import IconDelete from "../../../../icons/delete";
-import {accountStore} from "../../../../mobx/account.store";
 
 const TopAction = ({cookies, tab}) => {
     const confirmDialog = settingStore.confirm_dialog;
@@ -79,24 +76,6 @@ const TopAction = ({cookies, tab}) => {
                 }
 
                 {
-                    cookies.length > 0 && (
-                        <div className={`relative group`}>
-                            <div
-                                onClick={() =>  settingStore.popup = (accountStore.account?.email ? "share_cookie" : "remind_login")}
-                                className={`h-[30px] w-[30px] bg-[#3C3C3C] me-2 mb-2 last:mb-0 text-white rounded flex items-center cursor-pointer group hover:bg-white hover:text-gray-800`}>
-                                <IconShare cname={`w-5 h-5 mx-auto my-[5px]`} />
-                            </div>
-
-                            <div
-                                className={tooltipClass}>
-                                {extension.getLang("tooltip_top_action_share")}
-                            </div>
-                        </div>
-                    )
-                }
-
-
-                {
                     tab?.url.startsWith("http") && (
                         <div className={`relative group`}>
                             <div
@@ -136,8 +115,6 @@ const TopAction = ({cookies, tab}) => {
             <CopyCookie cookies={cookies}/>
 
             <ClearCookie cookies={cookies}/>
-
-            <ShareCookie cookies={cookies}/>
 
             <AddCookie />
 

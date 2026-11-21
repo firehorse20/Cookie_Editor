@@ -1,30 +1,4 @@
-<div align="center">
 
-<br/>
-
-<table>
-<tr>
-<td align="center" width="100%">
-
-### 🏆 Project Sponsor
-
-**[Ads.extension.vn](https://ads.extension.vn)**
-
-*An advertising platform for browser extensions that helps extension developers monetize their products. Sponsor of Cookie Editor.*
-
-<br/>
-
-[![Visit Ads.extension.vn](https://img.shields.io/badge/Ads.extension.vn-Visit-6366f1?style=for-the-badge)](https://ads.extension.vn)
-
-</td>
-</tr>
-</table>
-
-<br/>
-
----
-
-</div>
 
 <br/>
 
@@ -50,9 +24,12 @@ Cookie Editor is a powerful yet easy-to-use tool designed for seamless cookie ma
 
 ✅ Support customizing Clear browsing data
 
-💡 This build ships without ads: the sidebar ad banner, the wetab.org ad
-script and the "No Ads" upsell have been removed. The premium upgrade
-prompt for the extension's own paid tier is still present.
+💡 This build ships without ads and without the original author's
+account, upgrade and donation prompts: the sidebar ad banner, the
+wetab.org ad script, the "No Ads" upsell, the paid upgrade prompts,
+the Buy Me a Coffee button, the account login and the cookie-link
+sharing feature have all been removed. Usage analytics are not
+collected either.
 
 ## Install
 
@@ -62,7 +39,7 @@ Find this extension on the [Chrome Web Store.](https://chromewebstore.google.com
 
 ### Install on Firefox
 
-The extension is not published on Firefox Add-ons (AMO) yet, so install it as a temporary add-on from a local build (Firefox 140+ required). Full details, including how to submit it to AMO, are in [FIREFOX.md](FIREFOX.md).
+The extension is submitted to Firefox Add-ons (AMO) and awaiting review: https://addons.mozilla.org/firefox/addon/cookie-editor-firefox/ — until it is listed there, install it as a temporary add-on from a local build (Firefox 140+ required), or grab the zip from [Releases](https://github.com/firehorse20/Cookie_Editor/releases). Full details are in [FIREFOX.md](FIREFOX.md).
 
 1. Build the Firefox package:
    ```bash
@@ -79,7 +56,7 @@ The extension is not published on Firefox Add-ons (AMO) yet, so install it as a 
 ## How to build
 
 ```bash
-git clone git@github.com:buigiathanh/Cookie_Editor.git
+git clone https://github.com/firehorse20/Cookie_Editor.git
 cd Cookie_Editor
 ```
 
@@ -96,4 +73,4 @@ npm run build:firefox
 ```
 
 ## Info
-Website: [https://cookieeditor.org](https://cookieeditor.org)
+Project: [https://github.com/firehorse20/Cookie_Editor](https://github.com/firehorse20/Cookie_Editor)

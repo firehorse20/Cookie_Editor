@@ -39,18 +39,11 @@ const About = () => {
                                     {extension.getLang("about_content_2")}
                                 </p>
                                 <div className={`w-full flex justify-between`}>
-                                    <div className={`inline-block w-[48%]`}>
+                                    <div className={`inline-block w-full`}>
                                         <button
-                                            onClick={() => window.open('https://www.facebook.com/profile.php?id=100006007122729', '_blank')}
-                                            className={`w-full h-10 rounded-[10px] bg-blue-600 text-white`}>
-                                            Facebook
-                                        </button>
-                                    </div>
-                                    <div className={`inline-block w-[48%]`}>
-                                        <button
-                                            onClick={() => window.open('https://x.com/buigiathanh2802', '_blank')}
-                                            className={`w-full h-10 rounded-[10px] bg-black text-white`}>
-                                            X
+                                            onClick={() => window.open('https://github.com/firehorse20/Cookie_Editor', '_blank')}
+                                            className={`w-full h-10 rounded-[10px] bg-gray-900 text-white`}>
+                                            GitHub
                                         </button>
                                     </div>
                                 </div>

@@ -8,7 +8,7 @@ import N8nPermissionsModal from "./components/N8nPermissionsModal";
 import N8nConnectModal from "./components/N8nConnectModal";
 import N8nAlert from "./components/N8nAlert";
 
-const N8N_DOCS_URL = "https://cookieeditor.org/docs/n8n";
+const N8N_DOCS_URL = "https://github.com/firehorse20/Cookie_Editor";
 
 const openN8nDocs = () => {
     window.open(N8N_DOCS_URL, "_blank");

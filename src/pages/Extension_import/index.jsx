@@ -256,40 +256,17 @@ const ExtensionImport = () => {
 
             <div className={`w-full mt-10 border-t border-gray-200 py-5`}>
                 <div className={`w-full flex flex-wrap justify-center mb-5`}>
-                    <a href={`${import.meta.env.VITE_WEBSITE}`}>
+                    <a href={"https://github.com/firehorse20/Cookie_Editor"}>
                         <div className={`inline-block px-3`}>
                             <p className={`text-gray-800 text-sm`}>
                                 Home
                             </p>
                         </div>
                     </a>
-                    <a href={"https://x.com/buigiathanh2802"}>
-                        <div className={`inline-block px-3`}>
-                            <p className={`text-gray-800 text-sm`}>
-                                Contact
-                            </p>
-                        </div>
-                    </a>
-                    <a
-                        href={`${import.meta.env.VITE_WEBSITE}/privacy-policy`}>
-                        <div className={`inline-block px-3`}>
-                            <p className={`text-gray-800 text-sm`}>
-                                Privacy
-                            </p>
-                        </div>
-                    </a>
-                    <a href={"https://github.com/buigiathanh/Cookie_Editor"}>
+                    <a href={"https://github.com/firehorse20/Cookie_Editor"}>
                         <div className={`inline-block px-3`}>
                             <p className={`text-gray-800 text-sm`}>
                                 Open Source
-                            </p>
-                        </div>
-                    </a>
-                    <a
-                        href={`${import.meta.env.VITE_WEBSITE}/changelog`}>
-                        <div className={`inline-block px-3`}>
-                            <p className={`text-gray-800 text-sm`}>
-                                Changelog
                             </p>
                         </div>
                     </a>
@@ -297,12 +274,9 @@ const ExtensionImport = () => {
                 <div className={`w-full text-center`}>
                     <p className={`text-gray-800 text-sm mb-2`}>
                         <span className={`text-black font-bold`}>Cookie </span>
-                        <span className={`text-blue-600 font-bold`}>Editor</span> is developed by <a
-                        href={"https://x.com/buigiathanh2802"}><span
-                        className={`text-blue-600 font-bold`}>ThanhBui</span></a>
-                    </p>
-                    <p className={`text-gray-800 text-sm`}>
-                        Developed with all our heart ♥️
+                        <span className={`text-blue-600 font-bold`}>Editor</span> Firefox — <a
+                        href={"https://github.com/firehorse20/Cookie_Editor"}><span
+                        className={`text-blue-600 font-bold`}>firehorse20/Cookie_Editor</span></a>
                     </p>
                 </div>
             </div>

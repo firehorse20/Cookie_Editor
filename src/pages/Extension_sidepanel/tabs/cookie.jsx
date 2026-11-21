@@ -7,11 +7,23 @@ import {icons} from "../../../constants/icon";
 import EmptyCookie from "../components/empty_cookie";
 import {observer} from "mobx-react-lite";
 import {settingStore} from "../../../mobx/setting.store";
+import {hasHostPermissions, requestHostPermissions} from "../../../utils/browser";
 
 const ShowCookie = () => {
     const [tab, setTab] = useState(undefined);
     const [favicon, setFavicon] = useState("");
     const [cookieInfo, setCookieInfo] = useState(undefined);
+    // Firefox MV3 host permissions start ungranted: until the user
+    // allows website access, cookies.getAll() resolves to [].
+    const [needsPermission, setNeedsPermission] = useState(false);
+
+    const handleGrantPermission = async () => {
+        const granted = await requestHostPermissions();
+        setNeedsPermission(!granted);
+        if (granted) {
+            await handleGetCookies();
+        }
+    };
 
     const handleGetTabCurrent = async () => {
         const [tabCurrent] = await chrome.tabs.query({active: true, lastFocusedWindow: true});
@@ -42,6 +54,13 @@ const ShowCookie = () => {
             return;
         }
 
+        if (!(await hasHostPermissions())) {
+            setNeedsPermission(true);
+            setCookieInfo([]);
+            return;
+        }
+        setNeedsPermission(false);
+
         const data = await chrome.cookies.getAll({url: tab.url});
         setCookieInfo(JSON.parse(JSON.stringify(data)));
     }
@@ -59,6 +78,15 @@ const ShowCookie = () => {
     }, [tab])
 
     useEffect(() => {
+        // Ask for host access on first open (Firefox MV3 does not
+        // grant it at install time). If the user dismisses the
+        // prompt, the empty view offers a button to ask again.
+        hasHostPermissions().then(async (granted) => {
+            if (!granted) {
+                const ok = await requestHostPermissions();
+                setNeedsPermission(!ok);
+            }
+        });
         handleGetTabCurrent().then();
 
         chrome.tabs.onActivated.addListener(() => {
@@ -111,7 +139,10 @@ const ShowCookie = () => {
                                                     cookies={cookieInfo}
                                                 />
                                             ) : (
-                                                <EmptyCookie />
+                                                <EmptyCookie
+                                                    needsPermission={needsPermission}
+                                                    onGrant={handleGrantPermission}
+                                                />
                                             )
                                         }
                                     </>

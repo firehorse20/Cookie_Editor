@@ -104,6 +104,16 @@
     "no_cookie_description": {
         "message": "The website has no cookies."
     },
+
+    "msg_need_host_permission": {
+        "message": "Cookie Editor needs permission to read this site's cookies."
+    },
+    "msg_need_host_permission_desc": {
+        "message": "Firefox does not grant website access at install time. Click below to allow it, then the cookies will show up."
+    },
+    "btn_grant_permission": {
+        "message": "Allow access to websites"
+    },
     "sidebar_setting": {
         "message": "Setting"
     },
@@ -441,7 +451,7 @@
         "message": " Enjoy 25% off when you upgrade to a 1-year plan today!"
     },
     "about_title": {
-        "message": "About ThanhBui"
+        "message": "About Cookie Editor"
     },
     "about_content_1": {
         "message": "I am a developer and I enjoy creating extensions for Chrome. Helping you develop and market social media communications."

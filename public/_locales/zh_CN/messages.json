@@ -104,6 +104,16 @@
     "no_cookie_description": {
         "message": "此网站没有 Cookie。"
     },
+
+    "msg_need_host_permission": {
+        "message": "Cookie Editor 需要授权才能读取本站的 Cookie。"
+    },
+    "msg_need_host_permission_desc": {
+        "message": "Firefox 安装时不会自动授予网站访问权限。点下面按钮允许后，就能看到 Cookie 了。"
+    },
+    "btn_grant_permission": {
+        "message": "允许访问网站"
+    },
     "sidebar_setting": {
         "message": "设置"
     },
@@ -300,7 +310,7 @@
         "message": "今天升级年费计划立省 25%！"
     },
     "about_title": {
-        "message": "关于 ThanhBui"
+        "message": "关于 Cookie Editor"
     },
     "about_content_1": {
         "message": "我是开发者，喜欢制作 Chrome 扩展，助力社交平台传播与推广。"
